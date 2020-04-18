@@ -1,0 +1,82 @@
+{%extends 'base.html'%}
+
+
+{%block content%}
+    <div id="auth">
+        {%include 'header.html'%}
+        <div class="container">
+
+            <div class="row mt-5 justify-content-center">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-5">
+
+                        <div class="card">
+                            <div class="row justify-content-center">
+                                <!--Login tab-->
+                                <div class="col-6" id="login-tab" align="center">
+                                    <h3 class="p-3" id="login-btn" style="background-color:rgba(0,0,0,0.2);">Login</h3>
+                                </div>
+                                <!--SignUp-->
+                                <div class="col-6" id="signup-tab" align="center">
+                                    <h3 class="p-3" id="signup-btn">Signup</h3>
+                                </div>
+                                <!--Login form-->
+                                <div class="col-12 mt-3" id="login-form" {%if request.path == '/signup/'%}hidden{%endif%}>
+                                    <form action="{%url 'login'%}" method="post">
+                                        {%csrf_token%}
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3">
+                                                {{LoginForm.username}}
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3">
+                                                {{LoginForm.password}}
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3 mb-3">
+                                                <input class="btn btn-lg btn-primary" type="submit" value="Login" style="width:100%">
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3 mb-3">
+                                                <a href="#">Forget Password ?</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--Signup form-->
+                                <div class="col-12 mt-3" id="signup-form" {%if request.path != '/signup/'%}hidden{%endif%}>
+                                    <form action="{%url 'signup'%}" method="post">
+                                        {%csrf_token%}
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3">
+                                                {{SignUpForm.firstname}}{%if Errors.firstname%}<small style="color:red;">{{Errors.firstname}}</small>{%endif%}
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3">
+                                                {{SignUpForm.lastname}}{%if Errors.lastname%}<small style="color:red;">{{Errors.lasttname}}</small>{%endif%}
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3">
+                                                {{SignUpForm.username}}{%if Errors.email%}<small style="color:red;">{{Errors.email}}</small>{%endif%}
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3">
+                                                {{SignUpForm.email}}{%if Errors.username%}<small style="color:red;">{{Errors.username}}</small>{%endif%}
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3">
+                                                {{SignUpForm.password}}{%if Errors.password%}<small style="color:red;">{{Errors.password}}</small>{%endif%}
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3">
+                                                {{SignUpForm.conformpassword}}{%if Errors.conformpassword%}<small style="color:red;">{{Errors.conformpassword}}</small>{%endif%}
+                                            </div>
+                                            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 mt-3 mb-3">
+                                                <input class="btn btn-lg btn-primary" type="submit" value="SignUp" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+{%endblock%}

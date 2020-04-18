@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{%include 'header.html' %}
+<div class="row mt-3">
+    {%for pic in Pics%}
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mt-2">
+            <div class="card p-2">
+                <img src="{{pic.image.url}}" alt="{{pic.image.url}}" style="width:100%;">
+            </div>
+        </div>
+    {%empty%}
+        <div class="col">
+            No Images Found.
+        </div>
+    {%endfor%}
+</div>
+{%endblock%}

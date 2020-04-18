@@ -1,0 +1,57 @@
+{%load custom_tag%}
+{%load static%}
+
+<div class="card p-2">
+    <div class="row">
+        {%if institute.REVIEWS.all%}
+            {%for review in institute.REVIEWS.all|firstTwoReviews%}
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card p-2 mt-1 mb-1">
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 col-sm-3 col-3">
+                                <img src="{{review.user_id.PROFILE.profile_pic.url}}" alt="profile image" style="width:50px;height:50px;border-radius:100%;">
+                            </div>
+                            <div class="col-lg-11 col-md-11 col-sm-9 col-9">
+                                <h5>{{review.user_id}}</h5>
+                                <small>{{review.datetime}}</small>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                <small><b>Principal: </b>{{review.rate_principal}}<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"> out off 5<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                <small><b>Director: </b>{{review.rate_director}}<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"> out off 5<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                <small><b>TPO: </b>{{review.rate_tpo}}<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"> out off 5<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                <small><b>College: </b>{{review.rate_college}}<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"> out off 5<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-12">
+                                <small><b>Pros: </b>{{review.pros}}</small>
+                            </div>
+                            <div class="col-12">
+                                <small><b>Cons: </b>{{review.cons}}</small>
+                            </div>
+                            <div class="col-12">
+                                <small><b>My Point of View: </b>{{review.your_view}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <a href="{%url 'review' institute.id%}">
+                    <div class="card p-3 bg-primary" style="color:white;width:100%;height:100%;justify-content:center;align-items:center;">
+                        <h5>+More...</h5>
+                    </div>
+                </a>
+            </div>
+        {%else%}
+            <div class="col-12" align="center" style="color:gray;">
+                <h5>No reviews found.</h5>
+            </div>
+        {%endif%}
+
+    </div>
+</div>

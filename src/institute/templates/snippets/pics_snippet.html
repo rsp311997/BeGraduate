@@ -1,0 +1,25 @@
+{%load custom_tag%}
+<div class="card p-3">
+    <div class="row">
+        {%if institute.INSTITUTE_IMAGES.all %}
+            {%for img in institute.INSTITUTE_IMAGES.all|firstThreeImages%}
+                <div class="col-lg-3 col-md-2 col-sm-2">
+                    <div class="card p-3">
+                        <img src="{{img.image.url}}" alt="institute images" style="width:100%;height:100%;">
+                    </div>
+                </div>
+            {%endfor%}
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <a href="{%url 'institute-pics' institute.id %}">
+                    <div class="card" style="color:white;width:100%;height:100%;justify-content:center;align-items:center;background-color:gray;">
+                        +More..
+                    </div>
+                </a>
+            </div>
+        {%else%}
+        <div class="col-12" align="center">
+            <h3 style="color:gray;">No Images found.</h3>
+        </div>
+        {%endif%}
+    </div>
+</div>

@@ -1,0 +1,43 @@
+{%load static%}
+<!--Nav Bar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3">
+            <!--Brand Image-->
+            <!-- <a class="navbar-brand" href="{%url 'landingpage' %}">
+                <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+            </a> -->
+            <!--Brand Name-->
+            <a class="navbar-brand" href="{%url 'landingpage' %}" style="font-size:1.7rem;"><b>BeGraduate</b></a>
+            <!--Collapse Button-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--Menu-->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                {%if user.is_authenticated %}
+                   <li class="nav-item active">
+                     <a class="nav-link" href="{%url 'home'%}">Home</a>
+                   </li>
+                   <li class="nav-item active">
+                     <a class="nav-link" href="{%url 'profile'%}">Profile</a>
+                   </li>
+                {%endif%}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                {%if not user.is_authenticated %}
+                  <li class="nav-item active">
+                      <a class="navbar-brand" href="{%url 'auth'%}">
+                          <img src="{%static 'img/extras/login2.png'%}" width="50" height="50" alt="">
+                      </a>
+                  </li>
+                {%else%}
+                  <li class="nav-item active">
+                      <a class="navbar-brand" href="{%url 'logout'%}">
+                          <img src="{%static 'img/extras/logout2.png'%}" width="50" height="50" alt="">
+                      </a>
+                  </li>
+                {%endif%}
+                </ul>
+            </div>
+        </nav>
+<!--Nav Bar End-->

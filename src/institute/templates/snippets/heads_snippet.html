@@ -1,0 +1,79 @@
+{%load static%}
+{%load custom_tag%}
+
+<div class="card p-3">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card p-4">
+                <div class="row justify-content-center">
+                    <div class="col-4" align="center">
+                        <img src="{%if institute.PRINCIPAL.image %}{{institute.PRINCIPAL.image.url}}{%else%}{{institute.logo.url}}{%endif%}" alt="" style="width:100%;height:100%;">
+                    </div>
+                    <div class="col-12">
+                        <span class="bg-danger" style="padding:2%;border-radius:0.5rem;">
+                            <small>{{institute.REVIEWS.all|rate_principal}}</small> <img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px">
+                        </span>
+                    </div>
+                    <div class="col-12">
+
+                        <small>Principal : {{institute.PRINCIPAL.name}}</small>
+                    </div>
+                    <div class="col-12">
+                        <small>Qualification :  {{institute.PRINCIPAL.qualification}}</small>
+                    </div>
+                    <div class="col-12">
+                        <small>Experience : {{institute.PRINCIPAL.experience}} years</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card p-4">
+                <div class="row justify-content-center">
+                    <div class="col-4" align="center">
+                        <img src="{%if institute.DIRECTOR.image%}{{institute.DIRECTOR.image.url}}{%else%}{{institute.logo.url}}{%endif%}"" alt="" style="width:100%;height:100%;">
+                    </div>
+                    <div class="col-12">
+                        <span class="bg-danger" style="padding:2%;border-radius:0.5rem;">
+                            <small>{{institute.REVIEWS.all|rate_director}}</small> <img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px">
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <small>Director : {{institute.DIRECTOR.name}}</small>
+                    </div>
+                    <div class="col-12">
+                        <small>Qualification :  {{institute.DIRECTOR.qualification}}</small>
+                    </div>
+                    <div class="col-12">
+                        <small>Experience : {{institute.DIRECTOR.experience}} years</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card p-4">
+                <div class="row justify-content-center">
+                    <div class="col-4" align="center">
+                        <img src="{%if institute.TPO.image %}{{institute.TPO.image.url}}{%else%}{{institute.logo.url}}{%endif%}"" alt="" style="width:100%;height:100%;">
+                    </div>
+                    <div class="col-12">
+                        <span class="bg-danger" style="padding:2%;border-radius:0.5rem;">
+                            <small>{{institute.REVIEWS.all|rate_tpo}}</small> <img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px">
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <small>TPO : {{institute.TPO.name}}</small>
+                    </div>
+                    <div class="col-12">
+                        <small>Qualification :  {{institute.TPO.qualification}}</small>
+                    </div>
+                    <div class="col-12">
+                        <small>Experience : {{institute.TPO.experience}} years</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

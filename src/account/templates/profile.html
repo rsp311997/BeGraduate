@@ -1,0 +1,84 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{%include 'header.html' %}
+<div class="Profile container">
+    {%if Profile %}
+        <div class="jumbotron mt-5 pt-3 pb-3">
+            <div class="row justify-content-center">
+                <div class="col-12 mb-3" align="right">
+                    <a class="btn btn-lg btn-primary" href="{%url 'editprofile' user.id%}">Edit</a>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5" align="center">
+                    <img src="{{Profile.profile_pic.url}}" alt="{{Profile.profile_pic.url}}" style="width:200px;height:200px;border-radius:100%;">
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>Username</b><hr>{{user.username}}
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>Email</b><hr>{{user.email}}
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>Nickname</b><hr>{{Profile.nickname}}
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>Date of Birth</b><hr>{{Profile.dob}}
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>Country</b><hr>{{Profile.country}}
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>State</b><hr>{{Profile.state}}
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>City</b><hr>{{Profile.city}}
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>Occupation</b><hr>{{Profile.occupation}}
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>Contact</b><hr>{{Profile.contact}}
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>School Name</b><hr>{{Profile.schoolname}}
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-5">
+                    <b>College Name</b><hr>{{Profile.collegename}}
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
+                    <b>Description</b><hr>{{Profile.describe}}
+                </div>
+
+            </div>
+
+        </div>
+    {%else%}
+    <div class="jumbotron mt-5">
+        <form method="post" enctype="multipart/form-data">
+            {%if Errors%}
+                {%for error,value in Errors.items%}
+                    <div class="alert alert-danger">
+                            {{error}} | {{value}}
+                    </div>
+                {%endfor%}
+            {%endif%}
+            {%csrf_token%}
+            {{ProfileForm.as_p}}
+            <input type="submit" value="update">
+        </form>
+    </div>
+    {%endif%}
+
+</div>
+{%endblock%}

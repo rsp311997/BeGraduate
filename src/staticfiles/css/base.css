@@ -1,0 +1,15 @@
+.custom-card{
+    text-align: center;
+    position:fixed;
+    animation-name: error-message-card;
+    animation-duration: 4s;
+    visibility:False;
+    top:-100px;
+}
+
+@keyframes error-message-card {
+    0% {right:1%;top:0px;}
+    50% {right:1%;top:110px; animation-delay:4s;}
+    75% {right:1%;top:110px; animation-delay:4s;}
+    100% {right:1%;top:0px;}
+}

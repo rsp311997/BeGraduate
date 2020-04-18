@@ -1,0 +1,162 @@
+{%extends 'base.html'%}
+{%load static %}
+{%load custom_tag %}
+{%load review_custom_tags %}
+
+
+{%block content%}
+    {%include 'header.html'%}
+    <div class="reviewlist container">
+        <!--Jumbotron start-->
+        <div class="card mt-3 p-3" style="border-radius:1rem;">
+            <!--Row start-->
+            <div class="row">
+                <!--Col-1-->
+                <div class="col-4 pr-0" align="center">
+                    {%with AllReviews|reviewPageRating as review%}
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <h1>{{review.rating}} <img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:20px"> </h1><hr>
+                            </div>
+                            <div class="col-6">
+                                <small>Reviews {{review.totalReviews}}</small>
+                            </div>
+                        </div>
+
+                    {%endwith%}
+                </div>
+                <!--Col-2-->
+                <div class="col-8 pr-0 pl-0" align="center">
+                    <div class="row">
+                        {%for x in '54321'%}
+                            <div class="col-2 pr-0">
+                                <small>{{x}} <img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-8 mt-2 pr-0 pl-0">
+                                <div class="progress" style="height: 7px;width:100%;">
+                                    <div class="progress-bar" style="width:{{AllReviews|percent:x}}%" role="progressbar" aria-valuenow="{{AllReviews|stars:x}}" aria-valuemin="0" aria-valuemax="{{AllReviews|length}}"></div>
+                                </div>
+                            </div>
+                            <div class="col-2 pl-0">
+                                <small>{{AllReviews|stars:x}}</small>
+                            </div>
+                        {%endfor%}
+                    </div>
+                </div>
+
+                <!-- Col-3 -->
+                <div class="col">
+                    <a id="review-form-btn" class="btn btn-lg btn-primary">Add review</a>
+                </div>
+
+                <!-- Col-4 -->
+                <div id="review-form" class="col-12" hidden>
+                    <form method="post">
+                        {%csrf_token%}
+                        <input type="text" name="institute_id" value="{{institute_id}}" hidden >
+
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6 mt-3" align="center">
+                                <!-- rate Principal -->
+                                <input type="number" name="rate_college" placeholder="Rate College" style="width:100%" min="1" max="5" required >
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6 mt-3" align="center">
+                                <!-- rate tpo -->
+                                <input type="number" name="rate_principal" placeholder="Rate Principal" style="width:100%" min="1" max="5" required>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6 mt-3" align="center">
+                                <!-- rate_director -->
+                                <input type="number" name="rate_director" placeholder="Rate Director" style="width:100%" min="1" max="5" required>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6 mt-3" align="center">
+                                <!-- rate College -->
+                                <input type="number" name="rate_tpo" placeholder="Rate Tpo" style="width:100%" min="1" max="5" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12 mt-3" align="center">
+                                <!-- Pros -->
+                                <textarea rows="3" cols="60" name="pros" placeholder="Pros" style="width:100%" required></textarea>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12 mt-3" align="center">
+                                <!-- Cons -->
+                                <textarea rows="3" cols="60" name="cons" placeholder="Cons" style="width:100%" required></textarea>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-12 mt-3" align="center">
+                                <!-- your point of view -->
+                                <textarea rows="3" cols="60" name="your_view" placeholder="Your Point of View" style="width:100%" required></textarea>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4 mt-3" align="center">
+                                <input class="btn btn-lg btn-primary" type="submit" name="" value="submit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--Row end-->
+        </div>
+        <!--Jumbotron end-->
+
+
+        <div class="row mt-2">
+            {%for review in Reviews%}
+                <div class="col-12">
+                    <div class="card p-2 mt-1 mb-1" style="border-radius:1rem;">
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 col-sm-3 col-3">
+                                <img src="{{review.user_id.PROFILE.profile_pic.url}}" alt="profile image" style="width:50px;height:50px;border-radius:100%;">
+                            </div>
+                            <div class="col-lg-11 col-md-11 col-sm-9 col-9">
+                                <h5>{{review.user_id}}</h5>
+                                <small>{{review.datetime}}</small>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                <small><b>Principal: </b>{{review.rate_principal}}<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"> out off 5<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                <small><b>Director: </b>{{review.rate_director}}<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"> out off 5<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                <small><b>TPO: </b>{{review.rate_tpo}}<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"> out off 5<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                <small><b>College: </b>{{review.rate_college}}<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"> out off 5<img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:10px"></small>
+                            </div>
+                            <div class="col-12">
+                                <small><b>Pros: </b>{{review.pros}}</small>
+                            </div>
+                            <div class="col-12">
+                                <small><b>Cons: </b>{{review.cons}}</small>
+                            </div>
+                            <div class="col-12">
+                                <small><b>My Point of View: </b>{{review.your_view}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-1">
+                {%if current_page != 1%}
+                    <form method="get">
+                        <input type="text" name="pre" value="{{current_page|sub:1}}" hidden>
+                        <input type="submit" value="<">
+                    </form>
+                {%endif%}
+            </div>
+            <div class="col-1">
+                {{current_page}}/{{total_pages}}
+            </div>
+            <div class="col-1">
+                {%if current_page != total_pages%}
+                    <form method="get">
+                        <input type="text" name="next" value="{{current_page|add:1}}" hidden>
+                        <input type="submit" value=">">
+                    </form>
+                {%endif%}
+            </div>
+        </div>
+
+    </div>
+
+{%endblock%}

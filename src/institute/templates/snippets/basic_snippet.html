@@ -1,0 +1,35 @@
+<div class="card p-5" style="color:gray;">
+    <div class="row">
+            <div class="col-12">
+                <small><b style="color:black;">Institute Name</b> : {{institute.name}}</small>
+            </div>
+            <div class="col-12">
+                <small><b style="color:black;">Date of Establishment</b> : {{institute.doe}}</small>
+            </div>
+            <div class="col-12">
+                <small><b style="color:black;">Area</b> : {{institute.area}}</small>
+            </div>
+            <div class="col-12">
+                <small><b style="color:black;">Address</b> : {{institute.address}}</small>
+            </div>
+            <div class="col-12">
+                <small><b style="color:black;">Affiliated by</b> : {{institute.affiliated_by}}</small>
+            </div>
+            <div class="col-12">
+                <small><b style="color:black;">Type</b> : {{institute.type}}</small>
+            </div>
+            <div class="col-6">
+                <small><b style="color:black;">Bus fecilities</b> : {%if institute.buses %} Yes {%else%} No {%endif%}</small>
+            </div>
+            <div class="col-6">
+                <small><b style="color:black;">Canteen</b> : {%if institute.canteen %} Yes {%else%} No {%endif%}</small>
+            </div>
+            <div class="col-6">
+                <small><b style="color:black;">Is University</b> : {%if institute.is_university%} Yes {%else%} No {%endif%}</small>
+            </div>
+            <div class="col-6">
+                <small><b style="color:black;">Hostel</b> : {%if institute.hostel%} Yes {%else%} No {%endif%}</small>
+            </div>
+    </div>
+
+</div>

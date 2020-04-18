@@ -1,0 +1,161 @@
+{%extends 'base.html'%}
+{%load static%}
+{%load custom_tag%}
+
+{%block content%}
+    {%include 'header.html' %}
+    <div class="home">
+            <div class="container">
+                <!--Filter form-->
+                <div class="row mt-5">
+                    <div id="filter-btn-tab" class="col mt-3">
+                        <input id="filter-btn" class="btn btn-primary" type="button" value="Filter">
+                    </div>
+                    <div id="filter-tab" class="col mt-3" hidden>
+                        <form method="get">
+                            {%csrf_token%}
+                            <div class="row justify-content-center">
+                                <div class="col-xl-5 col-lg-5 col-md-2 col-sm-12">
+                                    {{FilterForm.college}}
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                    {{FilterForm.country}}
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                    {{FilterForm.state}}
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                                    {{FilterForm.city}}
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-3">
+                                    <input class="btn btn-primary btn-lg" type="submit" value="Search">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--List view-->
+                <div class="row mt-2">
+                    {%for institute in page%}
+                        <div class="col-12 mt-2">
+                            <div class="card p-3" style="border-radius:1rem;">
+                                <div class="row">
+
+                                    <div class="col-lg-2 col-md-2 col-sm-12" align="center" >
+                                        <img src='{{institute.logo.url}}' alt='{{institute.image}}' style="width:90px;height:90px;">
+                                    </div>
+
+                                    <div class="col-lg-10 col-md-10 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-0 pb-0">
+                                                <b>{{institute.name}}</b>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mt-0 pt-0">
+                                                <small>
+                                                        <b>Established in:</b> {{institute.doe}}<br/>
+                                                        <span class="bg-primary p-1" style="font-size:2vh;border-radius:0.5rem;">
+                                                            {{institute.REVIEWS.all|rate_college}}
+                                                            <img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:20px">
+                                                        </span>
+                                                </small>
+                                            </div>
+                                            <div class="col-12 mt-3">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6" >
+                                                        <small class="basic_btn" value="{{institute.abriviation}}-basic" style="cursor:pointer;">Basic Info</small>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <small><a href={{institute.website}} style="cursor:pointer;">Web Link</a></small>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <small class="description_btn" value="{{institute.abriviation}}-description" style="cursor:pointer;">Description</small>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <small class="pics_btn" value="{{institute.abriviation}}-pics" style="cursor:pointer;">Pics</small>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <small class="heads_btn" value="{{institute.abriviation}}-heads" style="cursor:pointer;">Heads</small>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                                        <small class="reviews_btn" value="{{institute.abriviation}}-reviews" style="cursor:pointer;">Reviews ({{institute.REVIEWS.count}})</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="row justify-content-righ">
+                                            <div class="col-4">
+                                                    <div class="bg-primary" style="padding:5%;border-radius:0.5rem;" align="center">
+                                                        <span style="font-size:3vh;">{{institute.REVIEWS.all|rate_college}} </span>
+                                                        <img src="{%static 'img/extras/star.png' %}" alt="stars" style="width:20px">
+                                                        out off 5 <img src="{%static 'img/extras/star.png' %}" alt="Stars" style="width:10px">
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="{{institute.abriviation}}-basic" hidden>
+                                {%include 'snippets/basic_snippet.html' %}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="{{institute.abriviation}}-description" hidden>
+                                {%include 'snippets/description_snippet.html' %}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="{{institute.abriviation}}-pics" hidden>
+                                {%include 'snippets/pics_snippet.html' %}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="{{institute.abriviation}}-heads" hidden>
+                                {%include 'snippets/heads_snippet.html' %}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="{{institute.abriviation}}-reviews" hidden>
+                                {%include 'snippets/reviews_snippet.html' %}
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
+
+
+                <!--pagination-->
+                <div class="row justify-content-center mt-5 mb-5">
+                    <div class="col-1" align="center">
+                        <form action="{%url 'home' %}" method="get">
+                            <div hidden>
+                                {{FilterForm}}
+                                <input type="text" name="pre" value="{{page_number|sub:1}}">
+                            </div>
+                            <input type="submit" value="<" {%if not page.has_previous%}hidden{%endif%}>
+                        </form>
+                    </div>
+                    <div class="col-1" align="center">
+                        {{page_number}}/{{total_pages}}
+                    </div>
+                    <div class="col-1" align="center">
+                        <form action="{%url 'home' %}" method="get">
+                            <div hidden>
+                                {{FilterForm}}
+                                <input type="text" name="next" value="{{page_number|add:1}}">
+                            </div>
+                            <input type="submit" value=">" {%if not page.has_next%}hidden{%endif%}>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+    {%include 'footer.html'%}
+{%endblock%}

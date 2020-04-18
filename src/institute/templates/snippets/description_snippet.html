@@ -1,0 +1,12 @@
+{%load custom_tag%}
+<div class="card p-3" >
+    <div class="row justify-content-center">
+        <div class="col" style="justify-content:center;align-items:center;">
+            {%if institute.describe%}
+                <small>{{institute.describe|first500Characters}}...<a href="{%url 'institute-description' institute.id%}">Read</a></small>
+            {%else%}
+                <small>No Description found.</small>
+            {%endif%}
+        </div>
+    </div>
+</div>
