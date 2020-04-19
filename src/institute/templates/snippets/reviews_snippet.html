@@ -49,7 +49,7 @@
             </div>
         {%else%}
             <div class="col-12" align="center" style="color:gray;">
-                <h5>No reviews found.</h5>
+                <a href="{%url 'review' institute.id%}" class="btn btn-primary btn-lg">Add Reviews</a>
             </div>
         {%endif%}
 

@@ -6,7 +6,8 @@ register=template.Library()
 def reviewPageRating(reviews):
     temp=0
     totalReviews=len(reviews)
-
+    rating=0
+    
     if(totalReviews != 0):
         for review in reviews:
             temp+=review.rate_college
@@ -14,20 +15,32 @@ def reviewPageRating(reviews):
         rating=round(temp/totalReviews,1)
         return {'rating':rating,'totalReviews':totalReviews}
 
+    return {'rating':rating,'totalReviews':totalReviews}
+
 
 @register.filter('stars')
 def five_stars(reviews,value):
     temp=0
-    for review in reviews:
-        if(review.rate_college==int(value)):
-            temp+=1
-    return temp
+    totalReviews=len(reviews)
+
+    if(totalReviews == 0):
+        return temp
+    else:
+        for review in reviews:
+            if(review.rate_college==int(value)):
+                temp+=1
+        return temp
 
 @register.filter('percent')
 def percent(reviews,value):
     temp=0
-    for review in reviews:
-        if(review.rate_college==int(value)):
-            temp+=1
-    percent = (temp/len(reviews))*100
-    return percent
+    totalReviews=len(reviews)
+
+    if(totalReviews == 0):
+        return temp
+    else:
+        for review in reviews:
+            if(review.rate_college==int(value)):
+                temp+=1
+        percent = (temp/len(reviews))*100
+        return percent
